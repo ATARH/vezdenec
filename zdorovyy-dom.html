@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Здоровый дом — Иван Везденецкий</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a;
+  --ink-card: rgba(255,255,255,0.035);
+  --border: rgba(255,255,255,0.09);
+  --orange:#ff5b1f;
+  --orange-deep:#c22e05;
+  --orange-soft:#ff8a4d;
+  --white:#f5f3ef;
+  --gray:#9c9890;
+  --green:#3fae2f;
+  --head:'Oswald', sans-serif;
+  --body:'Inter', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:70px;}
+body{background:var(--ink);color:var(--white);font-family:var(--body);font-weight:400;overflow-x:hidden;}
+::selection{background:var(--orange);color:#000;}
+a{color:inherit;text-decoration:none;}
+.container{max-width:1280px;margin:0 auto;padding:0 5vw;}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+h1,h2,h3{font-family:var(--head);text-transform:uppercase;line-height:1.05;}
+
+/* Базовые стили */
+.ticker-wrap{background:linear-gradient(90deg,var(--orange-deep),var(--orange));overflow:hidden;white-space:nowrap;padding:9px 0;position:relative;z-index:60;}
+.ticker{display:inline-block;animation:tick 28s linear infinite;font-family:var(--head);font-size:13px;letter-spacing:.04em;font-weight:600;color:#1a0800;}
+.ticker span{margin:0 26px; display:inline-flex; align-items:center; gap:14px;}
+.ticker span::before{content:''; width:6px; height:6px; background:#1a0800; border-radius:1px; display:inline-block; flex:none;}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;background:rgba(10,10,10,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+nav .links{display:flex;gap:30px;font-size:14px;color:var(--gray);}
+nav .links a:hover{color:var(--white);}
+@media (max-width:900px){nav .links{display:none;}}
+.brand-lockup{display:flex;align-items:center;gap:14px;}
+.brand-lockup img{height:46px;width:auto;max-width:100%;flex:none;object-fit:contain;}
+.glow-tr{background:radial-gradient(circle at 88% 8%, rgba(255,91,31,0.28), transparent 45%), var(--ink);}
+.glow-bl{background:radial-gradient(circle at 4% 92%, rgba(255,91,31,0.22), transparent 45%), var(--ink);}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:9px 20px;font-size:13.5px;color:var(--gray);margin:0 auto 26px;background:rgba(255,255,255,0.02);}
+.chip-wrap{text-align:center;}
+
+.hero{padding:70px 0 50px;text-align:center;}
+.hero h1{font-size:clamp(28px,4.4vw,50px);font-weight:700;max-width:1000px;margin:0 auto;}
+.hero h1 .accent{color:var(--orange);}
+.hero .pitch{max-width:680px;margin:26px auto 0;font-size:16.5px;line-height:1.65;color:var(--gray);}
+.cta-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:44px;}
+.btn{font-family:var(--head);font-size:14.5px;letter-spacing:.03em;padding:16px 30px;border-radius:10px;font-weight:600;text-transform:uppercase;transition:transform .15s ease;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:linear-gradient(135deg,var(--orange),var(--orange-deep));color:#150500;box-shadow:0 12px 30px -10px rgba(255,91,31,0.55);}
+.btn-secondary{background:transparent;border:1.5px solid var(--border);color:var(--white);}
+.btn-secondary:hover{border-color:var(--orange);}
+
+section{padding:100px 0;position:relative;}
+.sec-title{font-size:clamp(28px,3.8vw,44px);font-weight:700;max-width:760px;}
+.sec-lede{margin-top:18px;font-size:16px;line-height:1.6;color:var(--gray);max-width:600px;}
+
+/* Стили для блоков */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;border-radius:4px;overflow:hidden;}
+.info-card{background:var(--ink-card);border:1px solid var(--border);padding:34px 32px;}
+.info-card h3{font-size:21px;font-weight:600;margin-bottom:14px;color:var(--orange-soft);}
+.info-card p{font-size:14.5px;line-height:1.65;color:var(--gray);margin-bottom:14px;}
+.info-card ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:7px;}
+.info-card li{font-size:13.5px;color:var(--white);padding-left:16px;position:relative;}
+.info-card li::before{content:"—";position:absolute;left:0;color:var(--orange);}
+@media (max-width:820px){.info-grid{grid-template-columns:1fr;}}
+
+/* Стили для галереи */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px;}
+.gallery-item{aspect-ratio:4/3;background:#111;border:1px solid var(--border);overflow:hidden;border-radius:4px;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+.gallery-item:hover img{transform:scale(1.05);}
+@media (max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:480px){.gallery-grid{grid-template-columns:1fr;}}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px;}
+.price-card{background:var(--ink-card);border:1px solid var(--border);padding:30px;text-align:center;}
+.price-card.featured{border-color:var(--orange);background:linear-gradient(160deg, rgba(255,91,31,0.1), var(--ink-card));}
+.price-card .pn{font-family:var(--head);font-size:18px;font-weight:600;text-transform:uppercase;margin-bottom:10px;}
+.price-card .pp{font-family:var(--head);font-size:32px;font-weight:700;color:var(--orange);margin-bottom:6px;}
+.price-card .pd{font-size:13px;color:var(--gray);margin-bottom:20px;}
+.price-card ul{text-align:left;list-style:none;padding:0;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
+.price-card li{font-size:13.5px;color:var(--white);padding-left:18px;position:relative;}
+.price-card li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
+@media (max-width:820px){.pricing-grid{grid-template-columns:1fr;}}
+
+.final{text-align:center;padding:120px 0 100px;background:radial-gradient(circle at 92% 0%, rgba(255,91,31,0.22), transparent 40%), radial-gradient(circle at 2% 100%, rgba(255,91,31,0.16), transparent 40%), var(--ink);}
+.final h2{font-size:clamp(28px,4.4vw,48px);font-weight:700;max-width:840px;margin:0 auto;}
+.final p{margin-top:20px;color:var(--gray);font-size:15.5px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6;}
+
+footer{border-top:1px solid var(--border);padding:44px 0;}
+.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;}
+.foot-links{display:flex;gap:24px;font-size:13.5px;color:var(--gray);flex-wrap:wrap;}
+.foot-links a:hover{color:var(--white);}
+.foot-contact{font-size:13.5px;color:var(--gray);text-align:right;line-height:1.7;}
+.foot-contact a{color:var(--white);}
+.foot-contact a:hover{color:var(--orange);}
+.foot-fine{margin-top:24px;font-size:11.5px;color:#5a564f;}
+@media (max-width:820px){section{padding:70px 0;}.hero{padding:50px 0 40px;}}
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>ЭКО-ОТДЫХ В ПОДМОСКОВЬЕ</span>
+    <span>27 НОМЕРОВ КЛАССА ЛЮКС</span>
+    <span>СРЕДА ДЛЯ ВОССТАНОВЛЕНИЯ ОРГАНИЗМА</span>
+    <span>АВТОРСКАЯ СИСТЕМА ИВАНА ВЕЗДЕНЕЦКОГО</span>
+    <span>ЭКО-ОТДЫХ В ПОДМОСКОВЬЕ</span>
+    <span>27 НОМЕРОВ КЛАССА ЛЮКС</span>
+    <span>СРЕДА ДЛЯ ВОССТАНОВЛЕНИЯ ОРГАНИЗМА</span>
+    <span>АВТОРСКАЯ СИСТЕМА ИВАНА ВЕЗДЕНЕЦКОГО</span>
+  </div>
+</div>
+
+<nav>
+  <div class="links"><a href="index.html#philosophy">философия</a><a href="index.html#cases">кейсы</a><a href="index.html">все шаги</a></div>
+  
+  <div class="brand-lockup">
+    <a href="index.html"><img src="images/logo.png" alt="Корпорация Здоровья"></a>
+  </div>
+
+  <div class="links"><a href="#pricing">размещение</a><a href="#contacts">контакты</a></div>
+</nav>
+
+<section class="hero glow-tr">
+  <div class="container">
+    <div class="chip-wrap"><span class="chip">Шаг 07 · Здоровый дом</span></div>
+    <h1>Оздоровительный комплекс <span class="accent">«Здоровый дом»</span></h1>
+    <p class="pitch">Уникальная среда обитания в экологически чистом районе Подмосковья. 120 км от Москвы в эко-поселке «Альпийские луга». Место, где Guests могут пройти полное восстановление по авторской методике Ивана Везденецкого.</p>
+    
+    <div class="cta-row">
+      <a href="#pricing" class="btn btn-primary">Узнать условия</a>
+      <a href="#about" class="btn btn-secondary">О комплексе</a>
+    </div>
+  </div>
+</section>
+
+<section class="glow-bl" id="about">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">концепция и среда</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">Не просто гостиница, а территория здорового образа жизни</h2>
+    
+    <div class="info-grid reveal">
+      <div class="info-card">
+        <h3>Локация и экология</h3>
+        <p>Комплекс расположен в Клинском районе Московской области, в непосредственной близости от деревни Тиликтино. Это эко-поселение «Альпийские луга» — место, выбранное для тех, кто ценит активный отдых и спорт на природе.</p>
+        <ul>
+          <li>120 км от мегаполиса — идеальная удаленность</li>
+          <li>Обширная прогулочная и спортивная зона</li>
+          <li>Экологически чистый район для климатотерапии</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Инфраструктура</h3>
+        <p>Трехэтажное здание с мансардой общей площадью 620 кв.м. Высокое качество отделки и продуманный сервис. Для гостей без автомобиля предусмотрен прокат транспорта для прогулок по лесу.</p>
+        <ul>
+          <li>Парковка и прокат электромобилей</li>
+          <li>Уютная зона ресепшна и отдыха</li>
+          <li>Полный комплекс бытовых сервисов</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Питание и восстановление</h3>
+        <p>Кухня полного цикла с зоной столовой. Организован шведский стол с возможностью самостоятельного разогрева пищи. Специализированное меню для программ снижения веса и восстановления обмена веществ.</p>
+        <ul>
+          <li>3-разовое специализированное питание</li>
+          <li>Контроль рациона под методику Ивана</li>
+          <li>Свежие продукты и фито-бар</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Программы и методика</h3>
+        <p>Основная ориентация комплекса — клиенты программы восстановления организма по авторской методике Ивана Везденецкого. Камерная атмосфера (до 54 человек одновременно) позволяет уделить внимание каждому гостю.</p>
+        <ul>
+          <li>Снижение веса и детокс</li>
+          <li>Комплексное восстановление здоровья</li>
+          <li>Активный отдых и терренкур</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ГАЛЕРЕЯ ============ -->
+<section class="glow-tr">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">фото комплекса</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">Атмосфера «Здорового дома»</h2>
+    <p class="sec-lede reveal" style="margin:18px auto 0;text-align:center;">Пространство, где современные удобства гармонично сочетаются с природой.</p>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item"><img src="images/house-1.png" alt="Здоровый дом фото 1"></div>
+      <div class="gallery-item"><img src="images/house-2.png" alt="Здоровый дом фото 2"></div>
+      <div class="gallery-item"><img src="images/house-3.png" alt="Здоровый дом фото 3"></div>
+      <div class="gallery-item"><img src="images/house-4.png" alt="Здоровый дом фото 4"></div>
+      <div class="gallery-item"><img src="images/house-5.png" alt="Здоровый дом фото 5"></div>
+      <div class="gallery-item"><img src="images/house-6.png" alt="Здоровый дом фото 6"></div>
+    </div>
+  </div>
+</section>
+
+<section class="glow-bl" id="pricing">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">номерной фонд</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">27 номеров для комфортного восстановления</h2>
+    <p class="sec-lede reveal" style="margin:18px auto 0;text-align:center;">Средний сегмент с качеством услуг и состоянием номерного фонда «выше среднего». Все номера оснащены сплит-системами, телевизорами и собственными санузлами.</p>
+
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="pn">Размещение</div>
+        <div class="pp">1 гость</div>
+        <div class="pd">2-местный номер «Люкс»</div>
+        <ul>
+          <li>Высококачественная отделка</li>
+          <li>Собственный санузел с ванной</li>
+          <li>Доступ к спортивной зоне</li>
+        </ul>
+        <a href="#contacts" class="btn btn-secondary">Запросить даты</a>
+      </div>
+      <div class="price-card featured">
+        <div class="pn">Все включено</div>
+        <div class="pp">2 гостя</div>
+        <div class="pd">Программа восстановления</div>
+        <ul>
+          <li>Размещение в номере Люкс</li>
+          <li>3-разовое питание (шведский стол)</li>
+          <li>Услуги прачечной</li>
+          <li>Прокат электромобилей</li>
+        </ul>
+        <a href="#contacts" class="btn btn-primary">Выбрать шаг</a>
+      </div>
+      <div class="price-card">
+        <div class="pn">Доп. место</div>
+        <div class="pp">+1 гость</div>
+        <div class="pd">Евро-раскладушка</div>
+        <ul>
+          <li>Создание доп. мест в номере</li>
+          <li>Полный доступ к питанию</li>
+          <li>Обслуживание 24/7</li>
+        </ul>
+        <a href="#contacts" class="btn btn-secondary">Запросить даты</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container">
+    <h2 class="reveal">Готовы сменить среду обитания?</h2>
+    <p class="reveal">Оставьте заявку, чтобы узнать свободные даты заезда в оздоровительный комплекс и условия прохождения программы восстановления.</p>
+    <div class="cta-row reveal">
+      <a href="#contacts" class="btn btn-primary">Оставить заявку</a>
+      <a href="index.html" class="btn btn-secondary">Вернуться к 8 шагам</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contacts">
+  <div class="container">
+    <div class="foot-row">
+      <div class="brand-lockup">
+        <img src="images/logo.png" alt="Корпорация Здоровья">
+      </div>
+      <div class="foot-links">
+        <a href="index.html">главная</a>
+        <a href="index.html#cases">кейсы</a>
+        <a href="#pricing">размещение</a>
+      </div>
+      <div class="foot-contact">
+        г. Сочи, ул. Авиационная, 1А<br>
+        <a href="tel:+79180073222">8 (918) 007-32-22</a><br>
+        <a href="mailto:kachestvoghizni@yandex.ru">kachestvoghizni@yandex.ru</a>
+      </div>
+    </div>
+    <p class="foot-fine">Иван Везденецкий · Корпорация Здоровья и Долголетия · 8 шагов к новому себе · 2026</p>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
