@@ -65,9 +65,9 @@ section{padding:100px 0;position:relative;}
 .sec-lede{margin-top:18px;font-size:16px;line-height:1.6;color:var(--gray);max-width:600px;}
 
 /* ============ СТИЛИ ДЛЯ КАРУСЕЛИ ============ */
-.carousel-wrap{max-width:900px;margin:56px auto 0;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 50px -20px rgba(0,0,0,0.8);}
+.carousel-wrap{max-width:480px;margin:56px auto 0;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 50px -20px rgba(0,0,0,0.8);}
 .carousel-track{display:flex;transition:transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);}
-.carousel-slide{min-width:100%;aspect-ratio:16/9;background:#111;}
+.carousel-slide{min-width:100%;aspect-ratio:3/4;background:#111;}
 .carousel-slide img{width:100%;height:100%;object-fit:cover;filter:contrast(1.1);}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,10,10,0.6);backdrop-filter:blur(4px);border:1px solid var(--border);color:var(--white);padding:14px 18px;cursor:pointer;border-radius:50%;font-size:18px;transition:all .3s ease;z-index:10;}
 .carousel-btn:hover{background:var(--orange);border-color:var(--orange);color:#150500;}
@@ -145,15 +145,15 @@ footer{border-top:1px solid var(--border);padding:44px 0;}
     <p class="sec-lede reveal" style="margin:18px auto 0;text-align:center;">Минималистичный узнаваемый дизайн. Создано для тех, кто привык работать над собой.</p>
 
     <div class="carousel-wrap reveal">
-            <div class="carousel-track">
+      <div class="carousel-track">
         <!-- Слайды (если фото больше или меньше - просто добавьте или удалите блоки carousel-slide) -->
-        <div class="carousel-slide"><img src="images/apparel-1.jpg" alt="Одежда 1"></div>
-        <div class="carousel-slide"><img src="images/apparel-2.jpg" alt="Одежда 2"></div>
-        <div class="carousel-slide"><img src="images/apparel-3.jpg" alt="Одежда 3"></div>
-        <div class="carousel-slide"><img src="images/apparel-4.jpg" alt="Одежда 4"></div>
-        <div class="carousel-slide"><img src="images/apparel-5.jpg" alt="Одежда 5"></div>
-        <div class="carousel-slide"><img src="images/apparel-6.jpg" alt="Одежда 6"></div>
-            </div>
+        <div class="carousel-slide"><img src="apparel-1.jpeg" alt="Безрукавный zip-худи, чёрный"></div>
+        <div class="carousel-slide"><img src="apparel-2.jpeg" alt="Джоггеры с карманом на молнии"></div>
+        <div class="carousel-slide"><img src="apparel-3.jpeg" alt="Худи-жилет на кнопках, белый"></div>
+        <div class="carousel-slide"><img src="apparel-4.jpeg" alt="Топ с белой окантовкой"></div>
+        <div class="carousel-slide"><img src="apparel-5.jpeg" alt="Комплект: худи, джоггеры и аксессуары"></div>
+        <div class="carousel-slide"><img src="apparel-6.jpeg" alt="Худи-жилет на кнопках, белый, вид спереди"></div>
+      </div>
       
       <!-- Стрелки -->
       <button class="carousel-btn carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
