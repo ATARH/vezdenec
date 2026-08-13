@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Экобар — Иван Везденецкий</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a;
+  --ink-card: rgba(255,255,255,0.035);
+  --border: rgba(255,255,255,0.09);
+  --orange:#ff5b1f;
+  --orange-deep:#c22e05;
+  --orange-soft:#ff8a4d;
+  --white:#f5f3ef;
+  --gray:#9c9890;
+  --green:#3fae2f;
+  --head:'Oswald', sans-serif;
+  --body:'Inter', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:70px;}
+body{background:var(--ink);color:var(--white);font-family:var(--body);font-weight:400;overflow-x:hidden;}
+::selection{background:var(--orange);color:#000;}
+a{color:inherit;text-decoration:none;}
+.container{max-width:1280px;margin:0 auto;padding:0 5vw;}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+h1,h2,h3{font-family:var(--head);text-transform:uppercase;line-height:1.05;}
+
+/* Базовые стили */
+.ticker-wrap{background:linear-gradient(90deg,var(--orange-deep),var(--orange));overflow:hidden;white-space:nowrap;padding:9px 0;position:relative;z-index:60;}
+.ticker{display:inline-block;animation:tick 28s linear infinite;font-family:var(--head);font-size:13px;letter-spacing:.04em;font-weight:600;color:#1a0800;}
+.ticker span{margin:0 26px; display:inline-flex; align-items:center; gap:14px;}
+.ticker span::before{content:''; width:6px; height:6px; background:#1a0800; border-radius:1px; display:inline-block; flex:none;}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;background:rgba(10,10,10,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+nav .links{display:flex;gap:30px;font-size:14px;color:var(--gray);}
+nav .links a:hover{color:var(--white);}
+@media (max-width:900px){nav .links{display:none;}}
+.brand-lockup{display:flex;align-items:center;gap:14px;}
+.brand-lockup img{height:46px;width:auto;max-width:100%;flex:none;object-fit:contain;}
+.glow-tr{background:radial-gradient(circle at 88% 8%, rgba(255,91,31,0.28), transparent 45%), var(--ink);}
+.glow-bl{background:radial-gradient(circle at 4% 92%, rgba(255,91,31,0.22), transparent 45%), var(--ink);}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:9px 20px;font-size:13.5px;color:var(--gray);margin:0 auto 26px;background:rgba(255,255,255,0.02);}
+.chip-wrap{text-align:center;}
+
+.hero{padding:70px 0 50px;text-align:center;}
+.hero h1{font-size:clamp(28px,4.4vw,50px);font-weight:700;max-width:1000px;margin:0 auto;}
+.hero h1 .accent{color:var(--orange);}
+.hero .pitch{max-width:680px;margin:26px auto 0;font-size:16.5px;line-height:1.65;color:var(--gray);}
+.cta-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:44px;}
+.btn{font-family:var(--head);font-size:14.5px;letter-spacing:.03em;padding:16px 30px;border-radius:10px;font-weight:600;text-transform:uppercase;transition:transform .15s ease;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:linear-gradient(135deg,var(--orange),var(--orange-deep));color:#150500;box-shadow:0 12px 30px -10px rgba(255,91,31,0.55);}
+.btn-secondary{background:transparent;border:1.5px solid var(--border);color:var(--white);}
+.btn-secondary:hover{border-color:var(--orange);}
+
+section{padding:100px 0;position:relative;}
+.sec-title{font-size:clamp(28px,3.8vw,44px);font-weight:700;max-width:760px;}
+.sec-lede{margin-top:18px;font-size:16px;line-height:1.6;color:var(--gray);max-width:600px;}
+
+/* Стили для фото-блоков */
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:56px;}
+.split-text h3{font-size:21px;font-weight:600;margin-bottom:14px;color:var(--orange-soft);}
+.split-text p{font-size:14.5px;line-height:1.65;color:var(--gray);margin-bottom:14px;}
+.split-img{border-radius:8px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;background:#111;}
+.split-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease, filter .4s ease;filter:grayscale(20%) contrast(1.1);}
+.split-img:hover img{transform:scale(1.05);filter:grayscale(0%) contrast(1.05);}
+
+.wide-img{margin-top:56px;border-radius:8px;overflow:hidden;border:1px solid var(--border);aspect-ratio:21/9;background:#111;}
+.wide-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;filter:grayscale(20%) contrast(1.1);}
+.wide-img:hover img{transform:scale(1.03);}
+
+@media (max-width:820px){.split-grid{grid-template-columns:1fr;gap:32px;} .split-img{order:-1;} .wide-img{aspect-ratio:16/9;}}
+
+/* Сетка для меню */
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px;}
+.menu-card{background:var(--ink-card);border:1px solid var(--border);padding:30px;text-align:center;transition:border-color .3s ease, background .3s ease;}
+.menu-card:hover{border-color:var(--orange);background:rgba(255,91,31,0.05);}
+.menu-card.featured{border-color:var(--orange);background:linear-gradient(160deg, rgba(255,91,31,0.1), var(--ink-card));}
+.menu-card .pn{font-family:var(--head);font-size:18px;font-weight:600;text-transform:uppercase;margin-bottom:10px;}
+.menu-card .pp{font-family:var(--head);font-size:32px;font-weight:700;color:var(--orange);margin-bottom:6px;}
+.menu-card .pd{font-size:13px;color:var(--gray);margin-bottom:20px;}
+.menu-card ul{text-align:left;list-style:none;padding:0;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
+.menu-card li{font-size:13.5px;color:var(--white);padding-left:18px;position:relative;}
+.menu-card li::before{content:"+";position:absolute;left:0;color:var(--orange);font-weight:700;}
+@media (max-width:820px){.menu-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:600px){.menu-grid{grid-template-columns:1fr;}}
+
+/* Сетка для преимуществ */
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:56px;}
+.feat-card{background:var(--ink-card);border:1px solid var(--border);padding:24px 28px;}
+.feat-card h3{font-size:17px;font-weight:600;color:var(--orange-soft);margin-bottom:8px;text-transform:uppercase;}
+.feat-card p{font-size:14px;color:var(--gray);line-height:1.6;}
+@media (max-width:820px){.feat-grid{grid-template-columns:1fr;}}
+
+/* Стили для шагов */
+.steps-list{display:flex;flex-direction:column;gap:24px;}
+.step-item{border-left:2px solid var(--orange);padding-left:20px;}
+.step-item h3{font-size:18px;font-weight:600;color:var(--orange-soft);margin-bottom:8px;}
+.step-item p{font-size:14.5px;color:var(--gray);line-height:1.6;}
+
+.final{text-align:center;padding:120px 0 100px;background:radial-gradient(circle at 92% 0%, rgba(255,91,31,0.22), transparent 40%), radial-gradient(circle at 2% 100%, rgba(255,91,31,0.16), transparent 40%), var(--ink);}
+.final h2{font-size:clamp(28px,4.4vw,48px);font-weight:700;max-width:840px;margin:0 auto;}
+.final p{margin-top:20px;color:var(--gray);font-size:15.5px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6;}
+
+footer{border-top:1px solid var(--border);padding:44px 0;}
+.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;}
+.foot-links{display:flex;gap:24px;font-size:13.5px;color:var(--gray);flex-wrap:wrap;}
+.foot-links a:hover{color:var(--white);}
+.foot-contact{font-size:13.5px;color:var(--gray);text-align:right;line-height:1.7;}
+.foot-contact a{color:var(--white);}
+.foot-contact a:hover{color:var(--orange);}
+.foot-fine{margin-top:24px;font-size:11.5px;color:#5a564f;}
+@media (max-width:820px){section{padding:70px 0;}.hero{padding:50px 0 40px;}}
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>6 ПРОГРАММ ПИТАНИЯ</span>
+    <span>ДОСТАВКА К ДВЕРИ</span>
+    <span>СВЕЖЕПРИГОТОВЛЕННЫЕ БЛЮДА</span>
+    <span>БЕЗ КОНСЕРВАНТОВ</span>
+    <span>6 ПРОГРАММ ПИТАНИЯ</span>
+    <span>ДОСТАВКА К ДВЕРИ</span>
+    <span>СВЕЖЕПРИГОТОВЛЕННЫЕ БЛЮДА</span>
+    <span>БЕЗ КОНСЕРВАНТОВ</span>
+  </div>
+</div>
+
+<nav>
+  <div class="links"><a href="index.html#philosophy">философия</a><a href="index.html#cases">кейсы</a><a href="index.html">все шаги</a></div>
+  
+  <div class="brand-lockup">
+    <a href="index.html"><img src="images/logo.png" alt="Корпорация Здоровья"></a>
+  </div>
+
+  <div class="links"><a href="#menus">меню</a><a href="#contacts">контакты</a></div>
+</nav>
+
+<section class="hero glow-tr">
+  <div class="container">
+    <div class="chip-wrap"><span class="chip">Шаг 03 · Питание · Экобар</span></div>
+    <h1>Сбалансированное питание на каждый день — <span class="accent">доставка к вашей двери</span></h1>
+    <p class="pitch">Шесть программ питания под любую цель — от мягкого снижения веса до плотного графика активных тренировок. Свежеприготовленные блюда, герметичная упаковка, доставка в удобное время.</p>
+    
+    <div class="cta-row">
+      <a href="#menus" class="btn btn-primary">Выбрать меню</a>
+      <a href="#order" class="btn btn-secondary">Как заказать</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ О СЕРВИСЕ ============ -->
+<section class="glow-bl" id="story">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">О сервисе</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">Питание — часть системы, а не диета на неделю</h2>
+    
+    <!-- Блок с текстом и 1-й картинкой -->
+    <div class="split-grid reveal">
+      <div class="split-text">
+        <h3>Принцип экопитания</h3>
+        <p>В программах эко-туров и тренировочных курсов питание всегда идёт отдельной строкой — от 3 до 5 приёмов пищи в день, подобранных индивидуально под нагрузку и цель человека. «Экобар» переносит этот же принцип в повседневную жизнь: без выезда в горы, без личного повара, но с тем же уровнем контроля состава и калорийности.</p>
+        <p>Шесть готовых программ закрывают весь диапазон целей — от вегетарианского и облегчённого рациона до плотного меню для тех, кто живёт в активном, ненормированном графике тренировок.</p>
+      </div>
+      <div class="split-img">
+        <img src="images/ekobar-1.jpg" alt="Блюдо Экобар с курицей и киноа">
+      </div>
+    </div>
+
+    <!-- Широкая 4-я картинка (ингредиенты) -->
+    <div class="wide-img reveal">
+      <img src="images/ekobar-4.jpg" alt="Свежие ингредиенты Экобар">
+    </div>
+  </div>
+</section>
+
+<!-- ============ МЕНЮ ============ -->
+<section class="glow-tr" id="menus">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">программы питания</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">Шесть программ — на каждый день</h2>
+    <p class="sec-lede reveal" style="margin:18px auto 0;text-align:center;">Каждая программа рассчитана по калорийности и составу под свою задачу. Меню обновляется ежедневно.</p>
+
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="pn">Меню Лайт</div>
+        <div class="pp">1 000 ккал</div>
+        <div class="pd">Быстрое снижение веса</div>
+        <ul>
+          <li>Диетическое питание</li>
+          <li>Контроль порций</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <div class="pn">Меню Фитнес</div>
+        <div class="pp">1 300 ккал</div>
+        <div class="pd">Постепенное снижение веса</div>
+        <ul>
+          <li>Пассивный режим</li>
+          <li>Сбалансированный состав</li>
+        </ul>
+      </div>
+      <div class="menu-card featured">
+        <div class="pn">Меню Баланс</div>
+        <div class="pp">1 700 ккал</div>
+        <div class="pd">Поддержание формы</div>
+        <ul>
+          <li>Размеренный образ жизни</li>
+          <li>Без набора веса</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <div class="pn">Вегетарианское</div>
+        <div class="pp">1 700 ккал</div>
+        <div class="pd">Растительный рацион</div>
+        <ul>
+          <li>Без мяса и рыбы</li>
+          <li>Полноценный белок</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <div class="pn">Меню Спорт</div>
+        <div class="pp">2 000 ккал</div>
+        <div class="pd">Активный график</div>
+        <ul>
+          <li>Для тренировок</li>
+          <li>Плотный рацион</li>
+        </ul>
+      </div>
+      <div class="menu-card">
+        <div class="pn">Меню Спорт+</div>
+        <div class="pp">2 500 ккал</div>
+        <div class="pd">Высокие нагрузки</div>
+        <ul>
+          <li>Ненормированный график</li>
+          <li>Максимальная энергия</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПРЕИМУЩЕСТВА ============ -->
+<section class="glow-bl" id="advantages">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">преимущества</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">Наш сервис</h2>
+    <p class="sec-lede reveal" style="margin:18px auto 0;text-align:center;">То, что отличает «Экобар» от обычной доставки еды.</p>
+
+    <div class="feat-grid reveal">
+      <div class="feat-card">
+        <h3>Продуманный рацион</h3>
+        <p>Разнообразное меню, составленное под цель и калорийность программы.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Бесплатная доставка</h3>
+        <p>В удобное для вас место и время — домой, в офис или тренировочный зал.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Свежие и натуральные продукты</h3>
+        <p>Без химических добавок и консервантов. Только чистая польза для тела.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Экологичная посуда</h3>
+        <p>Чистая упаковка, пригодная для микроволновой печи и безопасная для природы.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Легко соблюдать режим</h3>
+        <p>Готовые порции на весь день — не нужно считать калории вручную.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Свежеприготовленные блюда</h3>
+        <p>Охлаждены и герметично упакованы сразу после приготовления.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СВЕЖЕСТЬ ============ -->
+<section class="glow-tr" id="freshness">
+  <div class="container">
+    <!-- Блок с текстом и 2-й картинкой -->
+    <div class="split-grid reveal">
+      <div class="split-text">
+        <span class="chip" style="margin:0 auto 26px 0;">свежесть</span>
+        <h2 class="sec-title" style="margin:0;">12–14 часов сохранности блюд</h2>
+        <p class="sec-lede" style="margin:18px auto 0 0;text-align:left;max-width:500px;">Гарантия свежести с момента доставки — блюда готовятся под заказ и упаковываются герметично, чтобы состав и вкус не менялись до самого приёма пищи.</p>
+      </div>
+      <div class="split-img">
+        <img src="images/ekobar-2.jpg" alt="Вегетарианское блюдо Экобар">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КАК ЗАКАЗАТЬ ============ -->
+<section class="glow-bl" id="order">
+  <div class="container">
+    <div class="chip-wrap reveal"><span class="chip">как заказать</span></div>
+    <h2 class="sec-title reveal" style="margin:0 auto;text-align:center;">Три шага до первой доставки</h2>
+    
+    <!-- Блок с шагами и 3-й картинкой -->
+    <div class="split-grid reveal">
+      <div class="split-text">
+        <div class="steps-list">
+          <div class="step-item">
+            <h3>01. Выберите программу</h3>
+            <p>По цели: снижение веса, поддержание формы или активные тренировки — от 1 000 до 2 500 ккал в день.</p>
+          </div>
+          <div class="step-item">
+            <h3>02. Укажите место и время</h3>
+            <p>Доставка бесплатная, подстраивается под ваш график — дом, работа или зал.</p>
+          </div>
+          <div class="step-item">
+            <h3>03. Получайте результат</h3>
+            <p>Ежедневные свежие порции — и отметка прогресса в личном «Паспорте здоровья и долголетия».</p>
+          </div>
+        </div>
+        <a href="#contacts" class="btn btn-primary" style="margin-top:24px;">Оставить заявку</a>
+      </div>
+      <div class="split-img">
+        <img src="images/ekobar-3.jpg" alt="Смузи Экобар">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container">
+    <h2 class="reveal">Питание — это 70% результата</h2>
+    <p class="reveal">Не считайте калории вручную — доверьте рацион профессионалам. Выбирайте программу, а остальное мы сделаем за вас.</p>
+    <div class="cta-row reveal">
+      <a href="#menus" class="btn btn-primary">Выбрать меню</a>
+      <a href="index.html" class="btn btn-secondary">Вернуться к 8 шагам</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contacts">
+  <div class="container">
+    <div class="foot-row">
+      <div class="brand-lockup">
+        <img src="images/logo.png" alt="Корпорация Здоровья">
+      </div>
+      <div class="foot-links">
+        <a href="index.html">главная</a>
+        <a href="index.html#cases">кейсы</a>
+        <a href="#menus">меню</a>
+      </div>
+      <div class="foot-contact">
+        г. Сочи, ул. Авиационная, 1А<br>
+        <a href="tel:+79180073222">8 (918) 007-32-22</a><br>
+        <a href="mailto:kachestvoghizni@yandex.ru">kachestvoghizni@yandex.ru</a>
+      </div>
+    </div>
+    <p class="foot-fine">Иван Везденецкий · Корпорация Здоровья и Долголетия · 8 шагов к новому себе · 2026</p>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
