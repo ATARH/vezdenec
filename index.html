@@ -277,53 +277,16 @@ footer{border-top:1px solid var(--border);padding:44px 0;}
   </div>
 </section>
 
-<!-- ============ ФИЛОСОФИЯ ============ -->
-<section class="glow-bl" id="philosophy">
-  <div class="container">
-    <div class="chip-wrap reveal"><span class="chip">философия системы</span></div>
-    <div class="reveal">
-      <h2 class="sec-title" style="margin:0 auto 56px;text-align:center;">Это не восхождение по ступеням, где нельзя перепрыгнуть</h2>
-    </div>
-
-    <!-- БЛОК С ФОТО ИВАНА И ТЕКСТОМ -->
-    <div class="philo-wrap reveal">
-      <div class="philo-img">
-        <img src="images/ivan-philosophy.jpg" alt="Иван Везденецкий">
-        <div class="philo-name">
-          Иван Везденецкий
-          <span>автор системы</span>
-        </div>
-      </div>
-      
-      <div class="feat-list" style="margin:0;">
-        <div class="feat">
-          <span class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 21h18"/><path d="M6 21V3h12v18"/><path d="M15 12h.01"/>
-            </svg>
-          </span>
-          <div>
-            <h3>Восемь дверей в одну и ту же комнату</h3>
-            <p>Кто-то входит через тело, кто-то через дом, кто-то через ментальное здоровье. Каждый шаг ведёт к одному итогу — целостной жизни, просто с разных сторон.</p>
-          </div>
-        </div>
-        <div class="feat">
-          <span class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-            </svg>
-          </span>
-          <div>
-            <h3>Правильной двери не существует</h3>
-            <p>Есть та, что откликается именно сейчас. Начните с шага, который сегодня кажется самым нужным — система выстроена так, что рано или поздно они соединятся сами.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+/* Блок с фото Ивана */
+.philo-wrap{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;margin-top:0;}
+.philo-img{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);aspect-ratio:3/4;background:#111;width:100%;max-width:340px;flex:none;}
+.philo-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.1);transition:filter .4s ease, transform .4s ease;}
+.philo-img:hover img{filter:grayscale(0%) contrast(1.05);transform:scale(1.05);}
+.philo-img::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:50%;background:linear-gradient(to top, rgba(10,10,10,0.95), transparent);pointer-events:none;}
+.philo-img .philo-name{position:absolute;bottom:24px;left:24px;z-index:2;font-family:var(--head);font-weight:700;font-size:22px;color:var(--white);text-transform:uppercase;}
+.philo-img .philo-name span{display:block;font-size:12px;color:var(--orange);font-weight:500;margin-top:4px;letter-spacing:0.1em;}
+.feat-list{flex:1;min-width:300px;}
+@media (max-width:768px){.philo-img{margin:0 auto 32px;}.feat-list{min-width:100%;}}
 <!-- ============ КЕЙСЫ И ФОТО ============ -->
 <section class="glow-tr" id="cases">
   <div class="container">
