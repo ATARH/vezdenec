@@ -94,14 +94,77 @@ nav .links a:hover{color:var(--white);}
 .btn-secondary{background:transparent;border:1.5px solid var(--border);color:var(--white);}
 .btn-secondary:hover{border-color:var(--orange);}
 
-/* ---------- numbered card row ---------- */
+/* ---------- numbered card row (Плавная UI анимация) ---------- */
 .num-row{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:70px;border-radius:4px;overflow:hidden;}
-.num-card{background:var(--ink-card);border:1px solid var(--border);padding:26px 20px 22px;min-height:170px;display:flex;flex-direction:column;justify-content:flex-end;}
-.num-card.hot{background:linear-gradient(160deg,var(--orange),var(--orange-deep));}
-.num-card .n{font-family:var(--head);font-size:38px;font-weight:700;color:rgba(255,255,255,0.16);}
-.num-card.hot .n{color:rgba(0,0,0,0.28);}
-.num-card p{font-size:14px;line-height:1.4;margin-top:10px;color:var(--gray);}
-.num-card.hot p{color:#160600;font-weight:500;}
+.num-card{
+  position:relative;
+  background:var(--ink-card);
+  border:1px solid var(--border);
+  padding:26px 20px 22px;
+  min-height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  animation: numCardBorderAnim 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.num-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--orange), var(--orange-deep));
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  animation: numGlowAnim 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.num-card > * {
+  position: relative;
+  z-index: 1;
+}
+.num-card .n{
+  font-family:var(--head);
+  font-size:38px;
+  font-weight:700;
+  color:rgba(255,255,255,0.16);
+  animation: numNColorAnim 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.num-card p{
+  font-size:14px;
+  line-height:1.4;
+  margin-top:10px;
+  color:var(--gray);
+  animation: numPColorAnim 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Задержки анимации для каждой карточки */
+.num-card:nth-child(1), .num-card:nth-child(1) .n, .num-card:nth-child(1) p, .num-card:nth-child(1)::after { animation-delay: 0s; }
+.num-card:nth-child(2), .num-card:nth-child(2) .n, .num-card:nth-child(2) p, .num-card:nth-child(2)::after { animation-delay: 2.4s; }
+.num-card:nth-child(3), .num-card:nth-child(3) .n, .num-card:nth-child(3) p, .num-card:nth-child(3)::after { animation-delay: 4.8s; }
+.num-card:nth-child(4), .num-card:nth-child(4) .n, .num-card:nth-child(4) p, .num-card:nth-child(4)::after { animation-delay: 7.2s; }
+.num-card:nth-child(5), .num-card:nth-child(5) .n, .num-card:nth-child(5) p, .num-card:nth-child(5)::after { animation-delay: 9.6s; }
+
+@keyframes numCardBorderAnim {
+  0%, 100% { border-color: var(--border); }
+  10% { border-color: var(--orange); }
+  20% { border-color: var(--border); }
+}
+@keyframes numGlowAnim {
+  0%, 100% { opacity: 0; }
+  10% { opacity: 1; }
+  20% { opacity: 0; }
+}
+@keyframes numNColorAnim {
+  0%, 100% { color: rgba(255,255,255,0.16); }
+  10% { color: rgba(0,0,0,0.28); }
+  20% { color: rgba(255,255,255,0.16); }
+}
+@keyframes numPColorAnim {
+  0%, 100% { color: var(--gray); }
+  10% { color: #160600; font-weight: 500; }
+  20% { color: var(--gray); }
+}
+
 @media (max-width:900px){.num-row{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:560px){.num-row{grid-template-columns:1fr;}}
 
@@ -345,7 +408,7 @@ footer{border-top:1px solid var(--border);padding:44px 0;}
     </div>
 
     <div class="num-row reveal">
-      <div class="num-card hot"><span class="n">01</span><p>линейный путь подходит не всем — у каждого разная точка входа</p></div>
+      <div class="num-card"><span class="n">01</span><p>линейный путь подходит не всем — у каждого разная точка входа</p></div>
       <div class="num-card"><span class="n">02</span><p>жёсткая программа с фиксированным стартом отпугивает раньше, чем начинается</p></div>
       <div class="num-card"><span class="n">03</span><p>результат в одной сфере жизни не должен ждать очереди остальных</p></div>
       <div class="num-card"><span class="n">04</span><p>мотивация выше, когда шаг выбран сам, а не назначен по расписанию</p></div>
@@ -473,9 +536,9 @@ footer{border-top:1px solid var(--border);padding:44px 0;}
       </div>
 
       <div class="case-card">
-        <img src="images/case-8.png" alt="Имя ученика">
+        <img src="images/case-8.png" alt="Гарри">
         <div class="case-overlay">
-          <div class="name">Имя ученика</div>
+          <div class="name">Гарри</div>
           <div class="meta">Программа тренировок</div>
           <div class="res">Результат</div>
         </div>
